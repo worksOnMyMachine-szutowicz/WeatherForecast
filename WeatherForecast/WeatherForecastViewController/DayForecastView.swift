@@ -18,7 +18,7 @@ class DayForecastView: UIView {
     init(viewData: WeatherForecastViewData.DayForecast) {
         super.init(frame: .zero)
         
-        dateLabel.text = viewData.date
+        dateLabel.text = "Forecast for \(viewData.date)"
         dateLabel.font = .boldSystemFont(ofSize: 20)
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing

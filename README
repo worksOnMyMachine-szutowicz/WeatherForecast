@@ -1,0 +1,8 @@
+Requirements:
+XCode 12.4
+pod CocoaPods installed
+
+Start the project by:
+1. pod install
+2. open WeatherForecast.xcworkspace with XCode
+3. build WeatherForecast scheme on iPhone
