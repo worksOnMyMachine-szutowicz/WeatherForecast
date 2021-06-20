@@ -19,8 +19,15 @@ struct WeatherForecastViewData {
         let day: TimeOfDayForecast
         let night: TimeOfDayForecast
     }
+    struct Stats {
+        let maxTemperature: (dateTime: String, value: String)
+        let minTemperature: (dateTime: String, value: String)
+        let meanTemperature: String
+        let modeTemperature: String
+    }
     let city: String
-    let temperatureForecasts: [DayForecast]
+    let dayForecasts: [DayForecast]
+    let stats: Stats
 }
 
 protocol WeatherForecastViewModelInterface {
@@ -58,14 +65,18 @@ class WeatherForecastViewModel: WeatherForecastViewModelInterface {
         
         dataRequest.elements()
             .map { forecastData in
-                let temperatureForecasts = forecastData.groupByDay().map { data -> WeatherForecastViewData.DayForecast in
+                let dayForecasts = forecastData.groupByDay().map { data -> WeatherForecastViewData.DayForecast in
                     let date = String(data[0].dtTxt.split(separator: " ")[0])
                     let morningForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.morningTemperature, humidity: data.morningHumidity)
                     let dayForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.dayTemperature, humidity: data.dayHumidity)
                     let nightForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.nightTemperature, humidity: data.nightHumidity)
                     return .init(date: date, morning: morningForecast, day: dayForecast, night: nightForecast)
                 }
-                return WeatherForecastViewData(city: forecastData.city.name, temperatureForecasts: temperatureForecasts)
+                let stats = WeatherForecastViewData.Stats(maxTemperature: forecastData.list.maxTemperature,
+                                                          minTemperature: forecastData.list.minTemperature,
+                                                          meanTemperature: forecastData.list.meanTemperature,
+                                                          modeTemperature: forecastData.list.modeTemperature)
+                return WeatherForecastViewData(city: forecastData.city.name, dayForecasts: dayForecasts, stats: stats)
             }.bind(to: outputRelay)
             .disposed(by: disposeBag)
         
@@ -109,6 +120,26 @@ private extension Array where Element == List {
         stringValueForTemperature(temperatureForecastFor(dayPart: .nightTime))
     }
     
+    var maxTemperature: (dateTime: String, value: String) {
+        let record = self.sorted(by: { $0.main.temp > $1.main.temp }).first
+        return dateTimeValueTemperature(for: record)
+    }
+    
+    var minTemperature: (dateTime: String, value: String) {
+        let record = self.sorted(by: { $0.main.temp < $1.main.temp }).first
+        return dateTimeValueTemperature(for: record)
+    }
+    
+    var meanTemperature: String {
+        String(format: "%.2f", self.map { $0.main.temp }.reduce(0, +)/Double(count))
+    }
+    
+    var modeTemperature: String {
+        let temperatures = self.map { round($0.main.temp) }
+        let occurences = temperatures.reduce(into: [:]) { $0[$1, default: 0] += 1 }.sorted(by: { $0.value > $1.value })
+        return stringValueForTemperature(occurences.first?.0)
+    }
+    
     var morningHumidity: String {
         stringValueForHumidity(humidityForecastFor(dayPart: .morningTime))
     }
@@ -143,5 +174,12 @@ private extension Array where Element == List {
         } else {
             return Values.unknown
         }
+    }
+    
+    private func dateTimeValueTemperature(for record: List?) -> (dateTime: String, value: String) {
+        guard let record = record else {
+            return (Values.unknown, Values.unknown)
+        }
+        return (record.dtTxt, stringValueForTemperature(record.main.temp))
     }
 }

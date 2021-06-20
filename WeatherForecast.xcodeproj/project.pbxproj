@@ -26,6 +26,8 @@
 		F2363B2C267D366D00CED32E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2363B2B267D366D00CED32E /* Assets.xcassets */; };
 		F2363B2F267D366D00CED32E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2363B2D267D366D00CED32E /* LaunchScreen.storyboard */; };
 		F2569935267F4EA400CAE6E2 /* TimeOfDayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2569934267F4EA400CAE6E2 /* TimeOfDayForecastView.swift */; };
+		F256993E267F6B2300CAE6E2 /* ForecastStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256993D267F6B2300CAE6E2 /* ForecastStatsView.swift */; };
+		F2569943267F6B9500CAE6E2 /* TitleValueLabelsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2569942267F6B9500CAE6E2 /* TitleValueLabelsRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		F2363B35267D366D00CED32E /* WeatherForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2363B40267D366D00CED32E /* WeatherForecastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2569934267F4EA400CAE6E2 /* TimeOfDayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDayForecastView.swift; sourceTree = "<group>"; };
+		F256993D267F6B2300CAE6E2 /* ForecastStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastStatsView.swift; sourceTree = "<group>"; };
+		F2569942267F6B9500CAE6E2 /* TitleValueLabelsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleValueLabelsRowView.swift; sourceTree = "<group>"; };
 		FC7B67D14F608B40F8F9C822 /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +154,8 @@
 				F22CD8D0267D42A6007F35F1 /* WeatherForecastViewModel.swift */,
 				F22CD905267F49A0007F35F1 /* DayForecastView.swift */,
 				F2569934267F4EA400CAE6E2 /* TimeOfDayForecastView.swift */,
+				F256993D267F6B2300CAE6E2 /* ForecastStatsView.swift */,
+				F2569942267F6B9500CAE6E2 /* TitleValueLabelsRowView.swift */,
 			);
 			path = WeatherForecastViewController;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 				F22CD8ED267F4643007F35F1 /* Observable+Weak.swift in Sources */,
 				F2363B27267D366C00CED32E /* WeatherForecastViewController.swift in Sources */,
 				F2569935267F4EA400CAE6E2 /* TimeOfDayForecastView.swift in Sources */,
+				F256993E267F6B2300CAE6E2 /* ForecastStatsView.swift in Sources */,
 				F22CD8B9267D3AAE007F35F1 /* HttpEngine.swift in Sources */,
 				F22CD8E1267D45C9007F35F1 /* AppCoordinator.swift in Sources */,
 				F22CD90B267F4A7C007F35F1 /* Array+Constraints.swift in Sources */,
@@ -417,6 +424,7 @@
 				F22CD8F5267F471D007F35F1 /* Observable+Error.swift in Sources */,
 				F22CD8D9267D4402007F35F1 /* AppFactory.swift in Sources */,
 				F22CD8D1267D42A6007F35F1 /* WeatherForecastViewModel.swift in Sources */,
+				F2569943267F6B9500CAE6E2 /* TitleValueLabelsRowView.swift in Sources */,
 				F22CD906267F49A0007F35F1 /* DayForecastView.swift in Sources */,
 				F22CD8CC267D40FD007F35F1 /* FiveDayForecastDto.swift in Sources */,
 				F2363B25267D366C00CED32E /* SceneDelegate.swift in Sources */,

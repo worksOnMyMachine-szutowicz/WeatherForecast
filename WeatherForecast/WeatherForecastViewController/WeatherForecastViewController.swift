@@ -48,7 +48,8 @@ class WeatherForecastViewController: UIViewController {
             .append(weak: self)
             .subscribe { vc, data in
                 vc.navigationItem.title = "Weather forecast for \(data.city)"
-                data.temperatureForecasts.forEach {
+                vc.stackView.addArrangedSubview(ForecastStatsView(stats: data.stats))
+                data.dayForecasts.forEach {
                     vc.stackView.addArrangedSubview(DayForecastView(viewData: $0))
                 }
             }.disposed(by: disposeBag)
