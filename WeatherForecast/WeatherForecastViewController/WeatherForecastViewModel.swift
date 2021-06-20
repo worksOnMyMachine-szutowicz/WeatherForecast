@@ -11,6 +11,7 @@ import RxCocoa
 struct WeatherForecastViewData {
     struct DayForecast {
         struct TimeOfDayForecast {
+            let skyStatus: SkyStatus?
             let temperature: String
             let humidity: String
         }
@@ -67,9 +68,9 @@ class WeatherForecastViewModel: WeatherForecastViewModelInterface {
             .map { forecastData in
                 let dayForecasts = forecastData.groupByDay().map { data -> WeatherForecastViewData.DayForecast in
                     let date = String(data[0].dtTxt.split(separator: " ")[0])
-                    let morningForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.morningTemperature, humidity: data.morningHumidity)
-                    let dayForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.dayTemperature, humidity: data.dayHumidity)
-                    let nightForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.nightTemperature, humidity: data.nightHumidity)
+                    let morningForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(skyStatus: data.morningSkyStatus, temperature: data.morningTemperature, humidity: data.morningHumidity)
+                    let dayForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(skyStatus: data.daySkyStatus, temperature: data.dayTemperature, humidity: data.dayHumidity)
+                    let nightForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(skyStatus: data.nightSkyStatus, temperature: data.nightTemperature, humidity: data.nightHumidity)
                     return .init(date: date, morning: morningForecast, day: dayForecast, night: nightForecast)
                 }
                 let stats = WeatherForecastViewData.Stats(maxTemperature: forecastData.list.maxTemperature,
@@ -152,12 +153,28 @@ private extension Array where Element == List {
         stringValueForHumidity(humidityForecastFor(dayPart: .nightTime))
     }
     
+    var morningSkyStatus: SkyStatus? {
+        skyStatusForecastFor(dayPart: .morningTime)
+    }
+    
+    var daySkyStatus: SkyStatus? {
+        skyStatusForecastFor(dayPart: .dayTime)
+    }
+    
+    var nightSkyStatus: SkyStatus? {
+        skyStatusForecastFor(dayPart: .nightTime)
+    }
+    
     private func temperatureForecastFor(dayPart: DayPartConsts) -> Double? {
         self.first(where: { $0.dtTxt.contains(dayPart.rawValue) })?.main.temp
     }
     
     private func humidityForecastFor(dayPart: DayPartConsts) -> Int? {
         self.first(where: { $0.dtTxt.contains(dayPart.rawValue) })?.main.humidity
+    }
+    
+    private func skyStatusForecastFor(dayPart: DayPartConsts) -> SkyStatus? {
+        self.first(where: { $0.dtTxt.contains(dayPart.rawValue) })?.weather.first?.main
     }
     
     private func stringValueForTemperature(_ temperature: Double?) -> String {
