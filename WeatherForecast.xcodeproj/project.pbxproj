@@ -18,11 +18,14 @@
 		F22CD8E1267D45C9007F35F1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CD8E0267D45C9007F35F1 /* AppCoordinator.swift */; };
 		F22CD8ED267F4643007F35F1 /* Observable+Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CD8EC267F4643007F35F1 /* Observable+Weak.swift */; };
 		F22CD8F5267F471D007F35F1 /* Observable+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CD8F4267F471D007F35F1 /* Observable+Error.swift */; };
+		F22CD906267F49A0007F35F1 /* DayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CD905267F49A0007F35F1 /* DayForecastView.swift */; };
+		F22CD90B267F4A7C007F35F1 /* Array+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CD90A267F4A7C007F35F1 /* Array+Constraints.swift */; };
 		F2363B23267D366C00CED32E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2363B22267D366C00CED32E /* AppDelegate.swift */; };
 		F2363B25267D366C00CED32E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2363B24267D366C00CED32E /* SceneDelegate.swift */; };
 		F2363B27267D366C00CED32E /* WeatherForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2363B26267D366C00CED32E /* WeatherForecastViewController.swift */; };
 		F2363B2C267D366D00CED32E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2363B2B267D366D00CED32E /* Assets.xcassets */; };
 		F2363B2F267D366D00CED32E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2363B2D267D366D00CED32E /* LaunchScreen.storyboard */; };
+		F2569935267F4EA400CAE6E2 /* TimeOfDayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2569934267F4EA400CAE6E2 /* TimeOfDayForecastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,8 @@
 		F22CD8E0267D45C9007F35F1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F22CD8EC267F4643007F35F1 /* Observable+Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Weak.swift"; sourceTree = "<group>"; };
 		F22CD8F4267F471D007F35F1 /* Observable+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Error.swift"; sourceTree = "<group>"; };
+		F22CD905267F49A0007F35F1 /* DayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayForecastView.swift; sourceTree = "<group>"; };
+		F22CD90A267F4A7C007F35F1 /* Array+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Constraints.swift"; sourceTree = "<group>"; };
 		F2363B1F267D366C00CED32E /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2363B22267D366C00CED32E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2363B24267D366C00CED32E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +71,7 @@
 		F2363B30267D366D00CED32E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2363B35267D366D00CED32E /* WeatherForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2363B40267D366D00CED32E /* WeatherForecastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2569934267F4EA400CAE6E2 /* TimeOfDayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDayForecastView.swift; sourceTree = "<group>"; };
 		FC7B67D14F608B40F8F9C822 /* Pods-WeatherForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecast.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecast/Pods-WeatherForecast.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +138,7 @@
 			children = (
 				F22CD8EC267F4643007F35F1 /* Observable+Weak.swift */,
 				F22CD8F4267F471D007F35F1 /* Observable+Error.swift */,
+				F22CD90A267F4A7C007F35F1 /* Array+Constraints.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -141,6 +148,8 @@
 			children = (
 				F2363B26267D366C00CED32E /* WeatherForecastViewController.swift */,
 				F22CD8D0267D42A6007F35F1 /* WeatherForecastViewModel.swift */,
+				F22CD905267F49A0007F35F1 /* DayForecastView.swift */,
+				F2569934267F4EA400CAE6E2 /* TimeOfDayForecastView.swift */,
 			);
 			path = WeatherForecastViewController;
 			sourceTree = "<group>";
@@ -398,14 +407,17 @@
 			files = (
 				F22CD8ED267F4643007F35F1 /* Observable+Weak.swift in Sources */,
 				F2363B27267D366C00CED32E /* WeatherForecastViewController.swift in Sources */,
+				F2569935267F4EA400CAE6E2 /* TimeOfDayForecastView.swift in Sources */,
 				F22CD8B9267D3AAE007F35F1 /* HttpEngine.swift in Sources */,
 				F22CD8E1267D45C9007F35F1 /* AppCoordinator.swift in Sources */,
+				F22CD90B267F4A7C007F35F1 /* Array+Constraints.swift in Sources */,
 				F22CD8BF267D3EE2007F35F1 /* WeatherRequests.swift in Sources */,
 				F2363B23267D366C00CED32E /* AppDelegate.swift in Sources */,
 				F22CD8C7267D405D007F35F1 /* WeatherService.swift in Sources */,
 				F22CD8F5267F471D007F35F1 /* Observable+Error.swift in Sources */,
 				F22CD8D9267D4402007F35F1 /* AppFactory.swift in Sources */,
 				F22CD8D1267D42A6007F35F1 /* WeatherForecastViewModel.swift in Sources */,
+				F22CD906267F49A0007F35F1 /* DayForecastView.swift in Sources */,
 				F22CD8CC267D40FD007F35F1 /* FiveDayForecastDto.swift in Sources */,
 				F2363B25267D366C00CED32E /* SceneDelegate.swift in Sources */,
 			);

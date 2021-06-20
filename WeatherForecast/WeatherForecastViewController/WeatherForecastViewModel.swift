@@ -85,7 +85,7 @@ private extension Array where Element == List {
         case nightTime = "21:00:00"
     }
     private struct Values {
-        static let unknown = "unknown"
+        static let unknown = "-"
         static let unit = "°C"
     }
     
