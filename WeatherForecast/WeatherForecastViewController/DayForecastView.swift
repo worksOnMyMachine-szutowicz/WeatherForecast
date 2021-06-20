@@ -10,7 +10,7 @@ import UIKit
 class DayForecastView: UIView {
     private struct Values {
         static let padding: CGFloat = 20
-        static let spacing: CGFloat = 10
+        static let spacing: CGFloat = 5
     }
     private let dateLabel = UILabel()
     private let stackView = UIStackView()
@@ -19,12 +19,13 @@ class DayForecastView: UIView {
         super.init(frame: .zero)
         
         dateLabel.text = viewData.date
+        dateLabel.font = .boldSystemFont(ofSize: 20)
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalSpacing
         stackView.spacing = Values.spacing
-        stackView.addArrangedSubview(TimeOfDayForecastView(timeOfDay: .morning, temperature: viewData.morningTemperature))
-        stackView.addArrangedSubview(TimeOfDayForecastView(timeOfDay: .day, temperature: viewData.dayTemperature))
-        stackView.addArrangedSubview(TimeOfDayForecastView(timeOfDay: .night, temperature: viewData.nightTemperature))
+        stackView.addArrangedSubview(TimeOfDayForecastView(timeOfDay: .morning, forecast: viewData.morning))
+        stackView.addArrangedSubview(TimeOfDayForecastView(timeOfDay: .day, forecast: viewData.day))
+        stackView.addArrangedSubview(TimeOfDayForecastView(timeOfDay: .night, forecast: viewData.night))
         
         layout()
     }
@@ -42,7 +43,7 @@ class DayForecastView: UIView {
          dateLabel.topAnchor.constraint(equalTo: topAnchor)].activate()
         [stackView.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor),
          stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Values.padding),
-         stackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor),
+         stackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: Values.padding),
          stackView.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
 }

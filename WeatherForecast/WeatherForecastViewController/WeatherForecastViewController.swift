@@ -9,6 +9,9 @@ import UIKit
 import RxSwift
 
 class WeatherForecastViewController: UIViewController {
+    private struct Values {
+        static let spacing: CGFloat = 10
+    }
     private let disposeBag = DisposeBag()
     private let viewModel: WeatherForecastViewModelInterface
     private let stackView = UIStackView()
@@ -20,7 +23,8 @@ class WeatherForecastViewController: UIViewController {
         
         view.backgroundColor = .white
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalSpacing
+        stackView.spacing = Values.spacing
         
         setupBindings()
         layout()
@@ -51,13 +55,20 @@ class WeatherForecastViewController: UIViewController {
     }
     
     private func layout() {
-        view.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let scrollView = UIScrollView(frame: .zero)
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        [scrollView, stackView].disableAutoresizingMask()
         
-        [stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-         stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
+        [scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
+        
+        [stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)].activate()
     }
 }
 

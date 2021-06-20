@@ -10,10 +10,14 @@ import RxCocoa
 
 struct WeatherForecastViewData {
     struct DayForecast {
+        struct TimeOfDayForecast {
+            let temperature: String
+            let humidity: String
+        }
         let date: String
-        let morningTemperature: String
-        let dayTemperature: String
-        let nightTemperature: String
+        let morning: TimeOfDayForecast
+        let day: TimeOfDayForecast
+        let night: TimeOfDayForecast
     }
     let city: String
     let temperatureForecasts: [DayForecast]
@@ -55,7 +59,11 @@ class WeatherForecastViewModel: WeatherForecastViewModelInterface {
         dataRequest.elements()
             .map { forecastData in
                 let temperatureForecasts = forecastData.groupByDay().map { data -> WeatherForecastViewData.DayForecast in
-                    .init(date: String(data[0].dtTxt.split(separator: " ")[0]), morningTemperature: data.morningTemperature, dayTemperature: data.dayTemperature, nightTemperature: data.nightTemperature)
+                    let date = String(data[0].dtTxt.split(separator: " ")[0])
+                    let morningForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.morningTemperature, humidity: data.morningHumidity)
+                    let dayForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.dayTemperature, humidity: data.dayHumidity)
+                    let nightForecast = WeatherForecastViewData.DayForecast.TimeOfDayForecast(temperature: data.nightTemperature, humidity: data.nightHumidity)
+                    return .init(date: date, morning: morningForecast, day: dayForecast, night: nightForecast)
                 }
                 return WeatherForecastViewData(city: forecastData.city.name, temperatureForecasts: temperatureForecasts)
             }.bind(to: outputRelay)
@@ -86,7 +94,7 @@ private extension Array where Element == List {
     }
     private struct Values {
         static let unknown = "-"
-        static let unit = "°C"
+        static let temperatureUnit = "°C"
     }
     
     var morningTemperature: String {
@@ -101,13 +109,37 @@ private extension Array where Element == List {
         stringValueForTemperature(temperatureForecastFor(dayPart: .nightTime))
     }
     
+    var morningHumidity: String {
+        stringValueForHumidity(humidityForecastFor(dayPart: .morningTime))
+    }
+    
+    var dayHumidity: String {
+        stringValueForHumidity(humidityForecastFor(dayPart: .dayTime))
+    }
+    
+    var nightHumidity: String {
+        stringValueForHumidity(humidityForecastFor(dayPart: .nightTime))
+    }
+    
     private func temperatureForecastFor(dayPart: DayPartConsts) -> Double? {
         self.first(where: { $0.dtTxt.contains(dayPart.rawValue) })?.main.temp
     }
     
+    private func humidityForecastFor(dayPart: DayPartConsts) -> Int? {
+        self.first(where: { $0.dtTxt.contains(dayPart.rawValue) })?.main.humidity
+    }
+    
     private func stringValueForTemperature(_ temperature: Double?) -> String {
         if let temperature = temperature {
-            return String(temperature) + Values.unit
+            return String(temperature) + Values.temperatureUnit
+        } else {
+            return Values.unknown
+        }
+    }
+    
+    private func stringValueForHumidity(_ humidity: Int?) -> String {
+        if let humidity = humidity {
+            return String(humidity)
         } else {
             return Values.unknown
         }
