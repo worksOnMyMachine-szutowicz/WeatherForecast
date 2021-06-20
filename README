@@ -1,6 +1,6 @@
 Requirements:
 XCode 12.4
-pod CocoaPods installed
+CocoaPods installed
 
 Start the project by:
 1. pod install
